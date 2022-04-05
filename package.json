@@ -1,0 +1,26 @@
+{
+  "name": "bff-consulta-cliente",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "npx src --extensions \".js,.ts\" --out-dir dist --copy-files --no-copy-ignored",
+    "start": "node dist/server.js",
+    "dev": "ts-node-dev --respawn --transpile-only --ignore-watch node_modules --no-notify src/server.ts",
+    "test": "jest"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/express": "^4.17.13",
+    "@types/jest": "^27.4.1",
+    "jest": "^27.5.1",
+    "ts-jest": "^27.1.4",
+    "ts-node-dev": "^1.1.8",
+    "typescript": "^4.6.3"
+  },
+  "dependencies": {
+    "express": "^4.17.3",
+    "tsc-init": "^2.1.0"
+  }
+}
