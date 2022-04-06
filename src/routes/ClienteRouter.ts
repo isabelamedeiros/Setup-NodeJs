@@ -1,23 +1,27 @@
-import { Router } from 'express';
+const express = require('express');
 
-const router = Router();
+const DadosCliente = require('../models/clienteSchema');
 
-let posts = [];
-
-router.get('/:idCliente', (req, res) => {
-  res.json(posts);
-})
-
+const router = express.Router();
 
 router.post('/:nome/:cpf/:endereco', (req, res) => {
   try {
-    const body = req.body;
-    console.log("POST: ", body);
-    posts.push(body);
-    return res.status(200).json({message: "Os dados do cliente foram salvos com sucesso!"})
+    let criarUsuarios = new DadosCliente({
+      cliente: req.body.cliente
+    });
+
+    console.log(criarUsuarios)
+
+    criarUsuarios.save()
+      .then(() => res.json({ message: 'Usuario criado com sucesso' }))
+      .catch((err) => res.json({ message: err }));
+
   } catch (error) {
     throw error;
   }
 })
+
+// router.get('/:idCliente', (req, res) => {
+// });
 
 export default router;
