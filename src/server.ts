@@ -1,26 +1,29 @@
 import express from 'express';
-import router from './routes/ClienteRouter';
-
+import router from './router';
+import bodyParser from 'body-parser'
 class App {
-    public app: express.Application;
-  
-    constructor() {
-      this.app = express();
-      this.start();
-      this.routes();
-    }
-  
-    public start(): void {    
-      this.app.listen(3333, () => {
-        console.log("Porta 3333");
-      })
-    }
-  
-    private routes(): void {
-      this.app.use(router)
-    }
+  public app: express.Application;
+
+  constructor() {
+    this.app = express();
+    this.start();
+    this.routes();
   }
-  
-  export default new App().app
 
+  public start(): void {
 
+    const port = 3333;
+    this.app.set('Porta: ', port)
+    
+    this.app.listen(port, () => {
+      const status = `rodando na porta ${port}`
+      console.log("Status:", status);
+    })
+  }
+
+  private routes(): void {
+    this.app.use(bodyParser.json())
+    this.app.use(router)
+  }
+}
+export default new App().app

@@ -1,13 +1,23 @@
-import { ClienteController } from "../controllers/ClienteController";
-import express from "express";
+import { Router } from 'express';
 
-const router = express.Router();
+const router = Router();
 
-const controller = new ClienteController(
-)
+let posts = [];
 
-router.get('/', (req, res) => {
-  return res.json({ message: 'Hello World!' })
+router.get('/:idCliente', (req, res) => {
+  res.json(posts);
+})
+
+
+router.post('/:nome/:cpf/:endereco', (req, res) => {
+  try {
+    const body = req.body;
+    console.log("POST: ", body);
+    posts.push(body);
+    return res.status(200).json({message: "Os dados do cliente foram salvos com sucesso!"})
+  } catch (error) {
+    throw error;
+  }
 })
 
 export default router;
