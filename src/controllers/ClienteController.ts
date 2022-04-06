@@ -7,11 +7,16 @@ exports.postCliente = (req, res) => {
             cliente: req.body.cliente
         });
 
-        criarUsuarios.save()
-            .then(() => res.json({ message: 'Usuario criado com sucesso' }))
-            .catch((err) => res.json({ message: err }));
+        if (!req.body.cliente.nome || req.body.cliente.nome == undefined || req.body.cliente.nome == null) {
+            console.log("O campo nome precisa ser preenchido, os dados nao foram gravados no BD")
+            return res.json({ message: "O campo nome precisa ser preenchido" })
+        } else {
+            criarUsuarios.save()
+                .then(() => res.json({ message: 'Usuario criado com sucesso' }))
+                .catch((err) => res.json({ message: err }));
 
-        console.log("Usuario salvo no BD: ", criarUsuarios)
+            console.log("Usuario salvo no BD: ", criarUsuarios)
+        }
     } catch (error) {
         throw error;
     }
