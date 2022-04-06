@@ -1,5 +1,3 @@
-import { Tipo } from "../domain/Tipo";
-
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
@@ -15,7 +13,6 @@ const ClienteSchema = new Schema(
           bairro: String,
           cidade: String,
           estado: String,
-        //   tipo: {type: String, enum: Tipo}
         tipo: ['RESIDENCIAL','TRABALHO']
       },
           cpf: String,

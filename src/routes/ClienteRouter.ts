@@ -1,27 +1,15 @@
 const express = require('express');
 
-const DadosCliente = require('../models/clienteSchema');
+const clienteController = require('../controllers/clienteController');
 
 const router = express.Router();
 
-router.post('/:nome/:cpf/:endereco', (req, res) => {
-  try {
-    let criarUsuarios = new DadosCliente({
-      cliente: req.body.cliente
-    });
+router.post('/:nome/:cpf/:endereco', clienteController.postCliente)
 
-    console.log(criarUsuarios)
+router.get('/:cpf', clienteController.getCliente);
 
-    criarUsuarios.save()
-      .then(() => res.json({ message: 'Usuario criado com sucesso' }))
-      .catch((err) => res.json({ message: err }));
+router.put('/:cpf', clienteController.putCliente);
 
-  } catch (error) {
-    throw error;
-  }
-})
-
-// router.get('/:idCliente', (req, res) => {
-// });
+router.delete('/:cpf', clienteController.deleteCliente);
 
 export default router;
